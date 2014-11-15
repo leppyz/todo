@@ -1,0 +1,34 @@
+$("button").click(function(){
+
+    		var content= $("#text").val();
+    		var c_time=new Date($.now());
+    		var t=c_time.getHours()+":"+c_time.getMinutes()+":"+c_time.getSeconds();
+    		var d=c_time.getDate()+"/"+(c_time.getMonth()+1)+"/"+c_time.getFullYear();
+           
+       		$('#post').prepend('<li class="post_list">' +linkify(content)+'<span class="close"><img src="close.png"/></span>'+'<span class="time" ><br>'+t+':'+d+'</span>'+'</li>');
+    		$("#text").val('');
+    		$(".post_list").mouseenter(function()
+    			{$(this).find(".close").css("visibility","visible")});
+    		$(".post_list").mouseleave(function()
+    			{$(this).find(".close").css("visibility","hidden")});
+    		 });
+    		$(document).on('click','.close',function()
+    			{
+    				
+    				$(this).parent().fadeOut(300,0,function()
+    					{
+    						$(this).remove();
+    					});
+    			});
+   
+    var text_max = 140;
+    $('#textarea_feedback').html(text_max + ' characters remaining');
+
+    $('#text').keyup(function() {
+        var text_length = $('#text').val().length;
+        var text_remaining = text_max - text_length;
+
+        $('#textarea_feedback').html(text_remaining + ' characters remaining');
+    });
+
+	});
